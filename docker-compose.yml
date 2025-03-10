@@ -14,7 +14,7 @@ services:
     ports:
       - 5433:5432
     healthcheck:
-      test: pg_isready -h osm-pg -p 5433 -U ${POSTGRES_USER}
+      test: pg_isready -h pg -U ${POSTGRES_USER}
       interval: 60s
       retries: 2
       timeout: 10s
