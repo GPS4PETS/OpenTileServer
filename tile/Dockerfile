@@ -18,7 +18,7 @@ COPY build_modtile.sh /tmp/build_modtile.sh
 RUN bash /tmp/build_modtile.sh ${OSM_STYLE_XML} && rm /tmp/build_modtile.sh
 
 # install carto
-RUN apt-get -y install npm nodejs && \
+RUN apt-get -y install vim npm nodejs && \
 	npm install -g carto
 
 # install Bright stylesheet
@@ -64,8 +64,8 @@ RUN a2enconf renderd && a2ensite 000-default
 # Configure webpages
 ADD https://github.com/GPS4PETS/OpenTileServer/archive/refs/tags/v1.0.zip /tmp/master.zip
 RUN unzip /tmp/master.zip -d /tmp && \
-	mv /tmp/OpenTileServer-master/app/* /var/www/html/ && \
-	rm -rf /tmp/master.zip && rm -rf /tmp/OpenTileServer-master
+	mv /tmp/OpenTileServer-1.0/app/* /var/www/html/ && \
+	rm -rf /tmp/master.zip && rm -rf /tmp/OpenTileServer-1.0
 	
 COPY latlong.py /tmp/latlong.py
 RUN LOC_NAME=$(echo ${##*/} | sed 's/\(.*\)-latest.*/\1/') \
