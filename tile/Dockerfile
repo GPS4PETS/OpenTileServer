@@ -6,10 +6,10 @@ ENV WORKDIR_OSM=/var/tmp/.osmosis
 ENV OSM_STYLE_XML='/usr/local/share/maps/style/OSMBright/OSMBright.xml'
 
 ARG DEBIAN_FRONTEND=noninteractive
-ARG POSTGRES_DB
-ARG POSTGRES_USER
-ARG POSTGRES_PASSWORD
-ARG PBF_URL
+ARG POSTGRES_DB=gis
+ARG POSTGRES_USER=tile
+ARG POSTGRES_PASSWORD=123456
+ARG PBF_URL=https://download.geofabrik.de/europe/germany-latest.osm.pbf
 
 # Install packages needed for building
 # install modtile/renderd
@@ -34,7 +34,7 @@ RUN	bash /tmp/index_polygons.sh && rm -f /tmp/index_polygons.sh
 
 # Configuring OSM Bright
 COPY fix_mml.sh /tmp/fix_mml.sh
-ADD http://www.naturalearthdata.com/http//www.naturalearthdata.com/download/10m/cultural/ne_10m_populated_places.zip /tmp/ne_10m_populated_places.zip
+ADD https://naciscdn.org/naturalearth/10m/cultural/ne_10m_populated_places.zip /tmp/ne_10m_populated_places.zip
 RUN unzip /tmp/ne_10m_populated_places.zip && rm -f /tmp/ne_10m_populated_places.zip && \
 	mkdir -p osm-bright-master/shp/ne_10m_populated_places && \
 	mv ne_10m_populated_places.* osm-bright-master/shp/ne_10m_populated_places/ && \
@@ -63,9 +63,9 @@ RUN a2enconf renderd && a2ensite 000-default
 
 # Configure webpages
 ADD https://github.com/AcuGIS/OpenTileServer/archive/refs/heads/master.zip /tmp/master.zip
-RUN unzip /tmp/master.zip && \
+RUN unzip /tmp/master.zip -d /tmp && \
 	mv /tmp/OpenTileServer-master/app/* /var/www/html/ && \
-	rm -rf /tmp/master.zip && /tmp/OpenTileServer-master
+	rm -rf /tmp/master.zip && rm -rf /tmp/OpenTileServer-master
 	
 COPY latlong.py /tmp/latlong.py
 RUN LOC_NAME=$(echo ${##*/} | sed 's/\(.*\)-latest.*/\1/') \

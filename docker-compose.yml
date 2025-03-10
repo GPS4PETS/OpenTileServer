@@ -1,0 +1,42 @@
+version: '3'
+
+services:
+  osm-pg:
+    build: pg
+    image: acugis/pg:latest
+    env_file:
+      - /root/OpenTileServer/.env
+    volumes:
+      - ./pg-data:/var/lib/postgresql/data
+    restart: always
+    container_name: osm-pg
+    hostname: pg
+    ports:
+      - 5433:5432
+    healthcheck:
+      test: pg_isready -h osm-pg -p 5433 -U ${POSTGRES_USER}
+      interval: 60s
+      retries: 2
+      timeout: 10s
+    networks:
+      - n7m_osm_bridge
+
+  osm-tile:
+    build: tile
+    env_file:
+      - /root/OpenTileServer/.env
+    image: acugis/opentileserver:latest
+    volumes:
+      - ./tiles-data:/var/cache/renderd/tiles
+    ports:
+      - 8181:80
+    container_name: osm-tile
+    depends_on:
+      - "osm-pg"
+    networks:
+      - n7m_osm_bridge
+
+networks:
+  n7m_osm_bridge:
+    external: true
+
