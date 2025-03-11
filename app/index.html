@@ -16,7 +16,7 @@
        			 .root {
             			display: flex;
             			flex-direction: column;
-            			height: calc(100% - 100px);
+            			height: calc(100% - 75px);
         		}
         		.footer {
            		 	display: flex;
@@ -29,25 +29,11 @@
             			font-weight: 400;
             			font-size: 1rem;
            			line-height: 1.5;
-       			 }
-			.infoBox {
-            			display: flex;
-            			flex-direction: row;
-	    			bottom: 5px;
-	    			background: rgba(0, 0, 0, 0.7);
-            			color: #FFFFFF; 
-            			width: 100%;
-	    			margin: 0px;
-	    			height: 25px;
-			}
-			.update {
-	    			display: flex;
-            			flex-direction: row;	
-			}
-       			 .footer-child {
+       			}
+       			.footer-child {
            			 flex: 1;  
         		}
-        		#map {
+        		.map {
 	    			height: 100%;
 			}
     		</style>
@@ -55,8 +41,10 @@
 		<div class="header">
        			 <a href="https://www.gps4pets.de" target="_blank"><img src="/assets/img/logo-white-sehrklein.png" alt="GPS4PETS" style="padding:5px;"></a>
     		</div>
-		
-		<div id="map"></div>
+	
+		<div class="root">	
+			<div id="map" class="map"></div>
+		</div>
 		<script src="https://unpkg.com/leaflet@1.8.0/dist/leaflet.js" integrity="sha512-BB3hKbKWOc9Ez/TAwyWxNXeoV9c1v6FIeYiBieIWkpLjauysF18NzgR1MBNBXf8/KABdlkX68nAhlwcDFLGPCQ==" crossorigin=""></script>
 		<script>
 			var map = L.map('map').setView([41.574361, 1.582031], 5);
@@ -76,8 +64,6 @@
 			}
 			map.on('click', onMapClick);
 		</script>
-
-		<div id="infoBox" class="infoBox"> &nbsp; last Update: <span id="update" style="display:inline;" w3-include-html="update.html">---</span></div>
 
     		<div class="footer">
      			 <div class="footer-child" style="text-align:left;">
