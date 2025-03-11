@@ -55,7 +55,7 @@
 			var map = L.map('map').setView([41.574361, 1.582031], 5);
 
 			L.control.search({
-				url: 'https://nominatim.gps4pets.de/search?format=json&q={s}',
+				url: 'https://nominatim.gps4pets.de/api/v4/search?format=json&q={s}',
 				propertyName: 'display_name',
 				jsonpParam: 'json_callback',		
 				propertyLoc: ['lat','lon'],
