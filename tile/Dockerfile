@@ -92,6 +92,9 @@ RUN apt-get -y install osmosis && \
 # install osm2pgsql
 RUN apt-get -y --no-install-recommends install osm2pgsql
 
+# install screen 
+RUN apt-get -y install screen 
+
 # Cleanup
 RUN    apt-get clean \
     && apt-get -y autoclean \
@@ -107,7 +110,8 @@ RUN useradd -m ${POSTGRES_USER} \
 
 COPY entrypoint.sh /entrypoint.sh
 COPY osm_load.sh /home/${POSTGRES_USER}/osm_load.sh
-RUN chmod +x /entrypoint.sh /home/${POSTGRES_USER}/osm_load.sh
+COPY renderd_list.sh /home/${POSTGRES_USER}/renderd_list.sh
+RUN chmod +x /entrypoint.sh /home/${POSTGRES_USER}/osm_load.sh /home/${POSTGRES_USER}/renderd_list.sh
 
 WORKDIR /home/${POSTGRES_USER}
 #USER ${POSTGRES_USER}
