@@ -8,6 +8,7 @@
     		<link rel="icon" type="image/svg+xml" href="/assets/img/favicon.svg">
 
 		<link href="/assets/css/leaflet-search.css" rel="stylesheet">
+                <link href="/assets/css/L.Control.Locate.min.css" rel="stylesheet">
 	</head>
 	<body >
 		 <style>
@@ -51,6 +52,7 @@
 		</div>
 		<script src="https://unpkg.com/leaflet@1.8.0/dist/leaflet.js" integrity="sha512-BB3hKbKWOc9Ez/TAwyWxNXeoV9c1v6FIeYiBieIWkpLjauysF18NzgR1MBNBXf8/KABdlkX68nAhlwcDFLGPCQ==" crossorigin=""></script>
 		<script src="/assets/js/leaflet-search.js"></script>
+                <script src="/assets/js/L.Control.Locate.min.js"></script>
 		<script>
 			var map = L.map('map', { zoomControl: false }).setView([51.436,10.29], 7);
 
@@ -76,6 +78,8 @@
     				}	
 			})
 			.addTo(map);
+
+			L.control.locate({ position: 'toproght' }).addTo(map);
 
 			L.control.scale().addTo(map);	
 
