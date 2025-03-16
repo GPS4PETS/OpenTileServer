@@ -62,6 +62,8 @@
                         })
                         .addTo(map);
 
+			L.control.locate({ position: 'topright' }).addTo(map);
+
 			L.control.search({
 				url: 'https://nominatim.gps4pets.de/api/v4/search?format=json&q={s}',
 				position: 'topright',	
@@ -78,8 +80,6 @@
     				}	
 			})
 			.addTo(map);
-
-			L.control.locate({ position: 'toproght' }).addTo(map);
 
 			L.control.scale().addTo(map);	
 
