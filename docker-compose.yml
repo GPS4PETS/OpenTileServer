@@ -30,6 +30,7 @@ services:
       - ./tiles-data:/var/cache/renderd/tiles
     ports:
       - 8181:80
+    restart: always
     container_name: osm-tile
     depends_on:
       - "osm-pg"
