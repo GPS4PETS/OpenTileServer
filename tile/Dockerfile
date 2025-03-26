@@ -62,7 +62,7 @@ COPY 000-default.conf /etc/apache2/sites-available/000-default.conf
 RUN a2enconf renderd && a2ensite 000-default
 
 # Configure webpages
-ADD https://github.com/GPS4PETS/OpenTileServer/archive/refs/tags/v1.0.zip /tmp/master.zip
+ADD https://github.com/GPS4PETS/OpenTileServer/archive/refs/tags/main.zip /tmp/master.zip
 RUN unzip /tmp/master.zip -d /tmp && \
 	mv /tmp/OpenTileServer-1.0/app/* /var/www/html/ && \
 	rm -rf /tmp/master.zip && rm -rf /tmp/OpenTileServer-1.0
