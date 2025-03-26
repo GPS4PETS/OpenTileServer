@@ -4,7 +4,7 @@
 OpenTileServer for Portainer
 
 # Install
-just import the docker-compose.yml to portainer
+just import the docker-compose.yml and .env files to portainer
     
 # Add PBF File
 open a shell to the tile container and run
