@@ -2,12 +2,12 @@ version: '3'
 
 services:
   osm-pg:
-    build: pg
+    build: 
+      context: /opt/OpenTileServer/pg/
+      dockerfile: /opt/OpenTileServer/pg/Dockerfile
     image: acugis/pg:latest
-    env_file:
-      - /root/OpenTileServer/.env
     volumes:
-      - ./pg-data:/var/lib/postgresql/data
+      - /opt/OpenTileServer/pg-data:/var/lib/postgresql/data
     restart: always
     container_name: osm-pg
     hostname: pg
@@ -22,12 +22,12 @@ services:
       - n7m_osm_bridge
 
   osm-tile:
-    build: tile
-    env_file:
-      - /root/OpenTileServer/.env
+    build: 
+      context: /opt/OpenTileServer/tile/
+      dockerfile: /opt/OpenTileServer/tile/Dockerfile
     image: acugis/opentileserver:latest
     volumes:
-      - ./tiles-data:/var/cache/renderd/tiles
+      - /opt/OpenTileServer/tiles-data:/var/cache/renderd/tiles
     ports:
       - 8181:80
     restart: always
