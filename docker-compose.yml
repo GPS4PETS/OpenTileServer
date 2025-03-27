@@ -1,15 +1,15 @@
-version: '3'
+on: '3'
 
 services:
   osm-pg:
     build: 
       context: /opt/OpenTileServer/pg/
       dockerfile: /opt/OpenTileServer/pg/Dockerfile
-    image: gps4pets/pg
+    image: gps4pets/ots-pg
     volumes:
       - /opt/OpenTileServer/pg-data:/var/lib/postgresql/data
     restart: always
-    container_name: osm-pg
+    container_name: ots-pg
     hostname: pg
     ports:
       - 5433:5432
@@ -25,13 +25,13 @@ services:
     build: 
       context: /opt/OpenTileServer/tile/
       dockerfile: /opt/OpenTileServer/tile/Dockerfile
-    image: gps4pets/opentileserver
+    image: gps4pets/ots-tile
     volumes:
       - /opt/OpenTileServer/tiles-data:/var/cache/renderd/tiles
     ports:
       - 8181:80
     restart: always
-    container_name: osm-tile
+    container_name: ots-tile
     depends_on:
       - "osm-pg"
     networks:
