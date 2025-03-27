@@ -5,7 +5,7 @@ services:
     build: 
       context: /opt/OpenTileServer/pg/
       dockerfile: /opt/OpenTileServer/pg/Dockerfile
-    image: acugis/pg:latest
+    image: gps4pets/pg
     volumes:
       - /opt/OpenTileServer/pg-data:/var/lib/postgresql/data
     restart: always
@@ -25,7 +25,7 @@ services:
     build: 
       context: /opt/OpenTileServer/tile/
       dockerfile: /opt/OpenTileServer/tile/Dockerfile
-    image: acugis/opentileserver:latest
+    image: gps4pets/opentileserver
     volumes:
       - /opt/OpenTileServer/tiles-data:/var/cache/renderd/tiles
     ports:
