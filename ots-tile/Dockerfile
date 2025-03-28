@@ -6,6 +6,7 @@ ENV WORKDIR_OSM=/var/tmp/.osmosis
 ENV OSM_STYLE_XML='/usr/local/share/maps/style/OSMBright/OSMBright.xml'
 
 ARG DEBIAN_FRONTEND=noninteractive
+ARG POSTGRES_HOST=ots-pg
 ARG POSTGRES_DB=gis
 ARG POSTGRES_USER=tile
 ARG POSTGRES_PASSWORD=123456
@@ -46,7 +47,7 @@ RUN apt-get -y install python2 && \
 	ln -s /usr/bin/python2 /usr/bin/python && \
 	mv configure.py.sample configure.py && \
 	sed -i.save 's|config\["path"\].*|config\["path"\] = path.expanduser("/usr/local/share/maps/style")|' configure.py && \
-	sed -i.save "s|config\[\"postgis\"\]\[\"host\"\].*|config\[\"postgis\"\]\[\"host\"\]=\"ots-pg\"|" configure.py && \
+	sed -i.save "s|config\[\"postgis\"\]\[\"host\"\].*|config\[\"postgis\"\]\[\"host\"\]=\"${POSTGRES_HOST}\"|" configure.py && \
 	sed -i.save "s|config\[\"postgis\"\]\[\"dbname\"\].*|config\[\"postgis\"\]\[\"dbname\"\]=\"${POSTGRES_DB}\"|" configure.py && \
 	sed -i.save "s|config\[\"postgis\"\]\[\"user\"\].*|config\[\"postgis\"\]\[\"user\"\]=\"${POSTGRES_USER}\"|" configure.py && \
 	sed -i.save "s|config\[\"postgis\"\]\[\"password\"\].*|config\[\"postgis\"\]\[\"password\"\]=\"${POSTGRES_PASSWORD}\"|" configure.py && \

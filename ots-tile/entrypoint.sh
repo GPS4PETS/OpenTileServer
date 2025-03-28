@@ -2,9 +2,10 @@
  
 export PGPASSWORD="${POSTGRES_PASSWORD}"
 export PGUSER=${POSTGRES_USER}
+export PGHOST="${POSTGRES_HOST}"
  
 # wait for PG to become ready
-while [ $(pg_isready -h ots-pg -d ${POSTGRES_DB} -U ${POSTGRES_USER} | grep -c 'accepting') -eq 0 ]; do
+while [ $(pg_isready -h ${POSTGRES_HOST} -d ${POSTGRES_DB} -U ${POSTGRES_USER} | grep -c 'accepting') -eq 0 ]; do
   sleep 1;
 done
  
