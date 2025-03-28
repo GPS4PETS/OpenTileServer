@@ -19,7 +19,7 @@ COPY build_modtile.sh /tmp/build_modtile.sh
 RUN bash /tmp/build_modtile.sh ${OSM_STYLE_XML} && rm /tmp/build_modtile.sh
 
 # install carto
-RUN apt-get -y install vim npm nodejs && \
+RUN apt-get -y install curl vim npm nodejs && \
 	npm install -g carto
 
 # install Bright stylesheet

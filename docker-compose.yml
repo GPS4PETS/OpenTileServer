@@ -1,39 +1,46 @@
 on: '3'
 
 services:
-  osm-pg:
+  ots-pg:
     build: 
-      context: /opt/OpenTileServer/pg/
-      dockerfile: /opt/OpenTileServer/pg/Dockerfile
+      context: /opt/OpenTileServer/ots-pg/
+      dockerfile: /opt/OpenTileServer/ots-pg/Dockerfile
     image: gps4pets/ots-pg
+    env_file:
+      - stack.env
     volumes:
       - /opt/OpenTileServer/pg-data:/var/lib/postgresql/data
     restart: always
     container_name: ots-pg
-    hostname: pg
+    hostname: ots-pg
     ports:
       - 5433:5432
     healthcheck:
-      test: pg_isready -h pg -U ${POSTGRES_USER}
+      test: pg_isready -h ots-pg -U ${POSTGRES_USER}
       interval: 60s
       retries: 2
       timeout: 10s
     networks:
       - n7m_osm_bridge
 
-  osm-tile:
+  ots-tile:
     build: 
-      context: /opt/OpenTileServer/tile/
-      dockerfile: /opt/OpenTileServer/tile/Dockerfile
+      context: /opt/OpenTileServer/ots-tile/
+      dockerfile: /opt/OpenTileServer/ots-tile/Dockerfile
     image: gps4pets/ots-tile
+    env_file:
+      - stack.env
     volumes:
       - /opt/OpenTileServer/tiles-data:/var/cache/renderd/tiles
     ports:
       - 8181:80
+    healthcheck:
+      test: "curl -f http://localhost"
     restart: always
     container_name: ots-tile
+    hostname: ots-tile
     depends_on:
-      - "osm-pg"
+      - "ots-pg"
     networks:
       - n7m_osm_bridge
 
