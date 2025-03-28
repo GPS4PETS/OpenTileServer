@@ -46,7 +46,7 @@ RUN apt-get -y install python2 && \
 	ln -s /usr/bin/python2 /usr/bin/python && \
 	mv configure.py.sample configure.py && \
 	sed -i.save 's|config\["path"\].*|config\["path"\] = path.expanduser("/usr/local/share/maps/style")|' configure.py && \
-	sed -i.save "s|config\[\"postgis\"\]\[\"host\"\].*|config\[\"postgis\"\]\[\"host\"\]=\"pg\"|" configure.py && \
+	sed -i.save "s|config\[\"postgis\"\]\[\"host\"\].*|config\[\"postgis\"\]\[\"host\"\]=\"ots-pg\"|" configure.py && \
 	sed -i.save "s|config\[\"postgis\"\]\[\"dbname\"\].*|config\[\"postgis\"\]\[\"dbname\"\]=\"${POSTGRES_DB}\"|" configure.py && \
 	sed -i.save "s|config\[\"postgis\"\]\[\"user\"\].*|config\[\"postgis\"\]\[\"user\"\]=\"${POSTGRES_USER}\"|" configure.py && \
 	sed -i.save "s|config\[\"postgis\"\]\[\"password\"\].*|config\[\"postgis\"\]\[\"password\"\]=\"${POSTGRES_PASSWORD}\"|" configure.py && \
