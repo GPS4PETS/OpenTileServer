@@ -2,6 +2,7 @@
  
 export PGPASSWORD="${POSTGRES_PASSWORD}"
 export PGUSER=${POSTGRES_USER}
+export PGDB=${POSTGRES_DB}
 export PGHOST="${POSTGRES_HOST}"
  
 # wait for PG to become ready
